@@ -60,40 +60,44 @@ const Quiz = () => {
   return (
     <div>
       <p className="heading-txt">QUIZ APP</p>
-      <div className="container" id="t1">
-        {showResult ? (
-          <Result
-            score={score}
-            totalScore={data.length}
-            wrongAnswer={wrongAnswer}
-            tryAgain={resetAll}></Result>
-        ) : (
-          <>
-            <div className="question">
-              <span id="quetion-number">{currentQuestion + 1} .</span>
-              <span id="quetion-txt">{data[currentQuestion]?.question}</span>
-            </div>
+      {data.length > 0 ? (
+        <div className="container" id="t1">
+          {showResult ? (
+            <Result
+              score={score}
+              totalScore={data.length}
+              wrongAnswer={wrongAnswer}
+              tryAgain={resetAll}></Result>
+          ) : (
+            <>
+              <div className="question">
+                <span id="quetion-number">{currentQuestion + 1} .</span>
+                <span id="quetion-txt">{data[currentQuestion]?.question}</span>
+              </div>
 
-            <div className="option-container">
-              {data[currentQuestion]?.options.map((option, i) => (
-                <button
-                  //className="option-btn"
-                  className={`option-btn ${
-                    clickedOption == i + 1 ? "checked" : null
-                  }`}
-                  onClick={() => {
-                    setClickedOption(i + 1);
-                  }}>
-                  {option}
-                </button>
-              ))}
-            </div>
-            <button onClick={newQuestion} type="button" id="next-button">
-              Next
-            </button>
-          </>
-        )}
-      </div>
+              <div className="option-container">
+                {data[currentQuestion]?.options.map((option, i) => (
+                  <button
+                    //className="option-btn"
+                    className={`option-btn ${
+                      clickedOption == i + 1 ? "checked" : null
+                    }`}
+                    onClick={() => {
+                      setClickedOption(i + 1);
+                    }}>
+                    {option}
+                  </button>
+                ))}
+              </div>
+              <button onClick={newQuestion} type="button" id="next-button">
+                Next
+              </button>
+            </>
+          )}
+        </div>
+      ) : (
+        <h1>No data available</h1>
+      )}
     </div>
   );
 };
